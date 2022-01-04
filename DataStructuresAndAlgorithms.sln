@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SortingAlgorithms", "Sortin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SortingAlgorithms.Test", "SortingAlgorithms.Test\SortingAlgorithms.Test.csproj", "{00685B61-57CD-4A02-8AE9-EEB6F30ED341}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trees", "Trees\Trees.csproj", "{9BE803CB-E9EB-4975-860E-5B0AB0AC1704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trees", "Trees\Trees.csproj", "{9BE803CB-E9EB-4975-860E-5B0AB0AC1704}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trees.Test", "Trees.Test\Trees.Test.csproj", "{DC449FAF-9A43-4520-872B-39081D8D489C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Trees.Test", "Trees.Test\Trees.Test.csproj", "{DC449FAF-9A43-4520-872B-39081D8D489C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TreeViewer.Console", "TreeViewer.Console\TreeViewer.Console.csproj", "{0AC5C050-4CB3-4546-8E55-245FD7C7B1FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{DC449FAF-9A43-4520-872B-39081D8D489C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC449FAF-9A43-4520-872B-39081D8D489C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC449FAF-9A43-4520-872B-39081D8D489C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AC5C050-4CB3-4546-8E55-245FD7C7B1FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AC5C050-4CB3-4546-8E55-245FD7C7B1FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AC5C050-4CB3-4546-8E55-245FD7C7B1FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AC5C050-4CB3-4546-8E55-245FD7C7B1FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
