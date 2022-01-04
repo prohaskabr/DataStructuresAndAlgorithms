@@ -1,4 +1,6 @@
-﻿namespace Trees
+﻿using Trees.Enums;
+
+namespace Trees
 {
     public abstract class Tree
     {
@@ -12,6 +14,14 @@
         public bool Find(int value)
         {
             return FindValue(value);
+        }
+
+        public void BreadthFirstTraversal(IOutputText output) {
+            output.Write("Starting process");
+        }
+
+        public void DepthFirstTraversal(TraversingOrder traversingOrder, IOutputText output) {
+            output.Write("Starting process");
         }
 
         protected abstract void InsertValue(int value);
