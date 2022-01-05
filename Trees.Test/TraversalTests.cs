@@ -8,7 +8,7 @@ namespace Trees.Test
                  20
                /    \
              10      30
-            /  \    /  \
+            /  \    /  
            06  14  24 
           /  \       \
          03  08      26
@@ -24,7 +24,7 @@ namespace Trees.Test
 
             tree.BreadthFirstTraversal(outputText);
 
-            AssertOutputOrder(outputText, 20, 10, 30, 06, 14, 03, 08, 24, 26);
+            AssertOutputOrder(outputText, 20, 10, 30, 06, 14, 24, 03, 08, 26);
         }
 
         private static void AssertOutputOrder(IOutputText outputText, params int[] numbers)
