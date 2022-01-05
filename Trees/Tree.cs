@@ -19,11 +19,36 @@ namespace Trees
             return FindValue(value);
         }
 
-        public void BreadthFirstTraversal(IOutputText output) {
+        public void BreadthFirstTraversal(IOutputText output)
+        {
             this.output = output;
             nodesQueue = new Queue<Node>();
             VisitNodes(Node);
         }
+
+        public void DepthFirstTraversal(TraversingOrder traversingOrder, IOutputText output)
+        {
+            this.output = output;
+
+            switch (traversingOrder)
+            {
+                case TraversingOrder.PreOrder:
+                    PreOrderTraversal(Node);
+                    break;
+                case TraversingOrder.InOrder:
+                    InOrderTraversal(Node);
+                    break;
+                case TraversingOrder.PostOrder:
+                    PostOrderTraversal(Node);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        protected abstract void InsertValue(int value);
+
+        protected abstract bool FindValue(int value);
 
         private void VisitNodes(Node node)
         {
@@ -35,7 +60,6 @@ namespace Trees
             while (nodesQueue.Any())
             {
                 var currentNode = nodesQueue.Dequeue();
-                
                 output.Write(currentNode.Value);
 
                 if (currentNode.LeftNode != null)
@@ -46,12 +70,35 @@ namespace Trees
             }
         }
 
-        public void DepthFirstTraversal(TraversingOrder traversingOrder, IOutputText output) {
-            output.Write("Starting process");
+        private void PreOrderTraversal(Node node) {
+
+            if (node is null)
+                return;
+
+            output.Write(node.Value);
+            PreOrderTraversal(node.LeftNode);
+            PreOrderTraversal(node.RightNode);
         }
 
-        protected abstract void InsertValue(int value);
+        private void InOrderTraversal(Node node)
+        {
+            if (node is null)
+                return;
 
-        protected abstract bool FindValue(int value);
+            InOrderTraversal(node.LeftNode);
+            output.Write(node.Value);
+            InOrderTraversal(node.RightNode);            
+        }
+
+        private void PostOrderTraversal(Node node)
+        {
+            if (node is null)
+                return;
+
+            PostOrderTraversal(node.LeftNode);            
+            PostOrderTraversal(node.RightNode);
+            output.Write(node.Value);
+        }
+
     }
 }
