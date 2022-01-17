@@ -1,13 +1,13 @@
 ﻿using Trees.Enums;
 
-namespace Trees
+namespace Trees.BinaryTree
 {
     public abstract class Tree
     {
         private IOutputText output;
         private Queue<Node> nodesQueue;
 
-        public Node Node { get; set; }
+        public Node RootNode { get; set; }
 
         public void Insert(int value)
         {
@@ -23,7 +23,7 @@ namespace Trees
         {
             this.output = output;
             nodesQueue = new Queue<Node>();
-            VisitNodes(Node);
+            VisitNodes(RootNode);
         }
 
         public void DepthFirstTraversal(TraversingOrder traversingOrder, IOutputText output)
@@ -33,22 +33,98 @@ namespace Trees
             switch (traversingOrder)
             {
                 case TraversingOrder.PreOrder:
-                    PreOrderTraversal(Node);
+                    PreOrderTraversal(RootNode);
                     break;
                 case TraversingOrder.InOrder:
-                    InOrderTraversal(Node);
+                    InOrderTraversal(RootNode);
                     break;
                 case TraversingOrder.PostOrder:
-                    PostOrderTraversal(Node);
+                    PostOrderTraversal(RootNode);
                     break;
                 default:
                     break;
             }
         }
 
+        public int Height()
+        {
+            return GetHeight(RootNode);
+        }
+
+        public int MinValue()
+        {
+            return GetMinValue(RootNode);
+        }
+
+        public int MinValueFromBinarySearchTree()
+        {
+            if (RootNode is null)
+                return -1;
+
+            var current = RootNode;
+
+            while (current.LeftNode != null)
+            {
+                current = current.LeftNode;
+            }
+
+            return current.Value;
+        }
+
+        public bool Equals(Tree other)
+        {
+            return Equals(RootNode, other.RootNode);
+        }
+
         protected abstract void InsertValue(int value);
 
         protected abstract bool FindValue(int value);
+
+
+        private bool Equals(Node node1, Node node2)
+        {
+
+            if (node1 is null && node2 is null)
+                return true;
+
+            if (node1 is null || node2 is null)
+                return false;
+
+            return node1.Value.Equals(node2.Value) &&
+                Equals(node1.LeftNode, node2.LeftNode) &&
+                Equals(node1.RightNode, node2.RightNode);
+        }
+
+        private int GetMinValue(Node node)
+        {
+            if (node is null)
+                return -1;
+
+            if (node.IsLeaf)
+                return node.Value;
+
+            var leftValue = GetMinValue(node.LeftNode);
+            var rightValue = GetMinValue(node.RightNode);
+
+            if (leftValue == -1)
+                leftValue = rightValue + 1;
+
+            if (rightValue == -1)
+                rightValue = leftValue + 1;
+
+            return Math.Min(node.Value, Math.Min(leftValue, rightValue));
+        }
+
+        private int GetHeight(Node node)
+        {
+            if (node is null)
+                return -1;
+
+            if (node.IsLeaf)
+                return 0;
+
+            return Math.Max(GetHeight(node.LeftNode), GetHeight(node.RightNode)) + 1;
+        }
 
         private void VisitNodes(Node node)
         {
@@ -70,7 +146,8 @@ namespace Trees
             }
         }
 
-        private void PreOrderTraversal(Node node) {
+        private void PreOrderTraversal(Node node)
+        {
 
             if (node is null)
                 return;
@@ -87,7 +164,7 @@ namespace Trees
 
             InOrderTraversal(node.LeftNode);
             output.Write(node.Value);
-            InOrderTraversal(node.RightNode);            
+            InOrderTraversal(node.RightNode);
         }
 
         private void PostOrderTraversal(Node node)
@@ -95,7 +172,7 @@ namespace Trees
             if (node is null)
                 return;
 
-            PostOrderTraversal(node.LeftNode);            
+            PostOrderTraversal(node.LeftNode);
             PostOrderTraversal(node.RightNode);
             output.Write(node.Value);
         }

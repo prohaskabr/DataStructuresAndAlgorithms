@@ -4,7 +4,7 @@
     {
         protected override bool FindValue(int value)
         {
-            var current = Node;
+            var current = RootNode;
 
             while (current != null)
             {
@@ -22,13 +22,13 @@
 
         protected override void InsertValue(int value)
         {
-            if (Node is null)
+            if (RootNode is null)
             {
-                Node = new Node(value);
+                RootNode = new Node(value);
                 return;
             }
 
-            var current = Node;
+            var current = RootNode;
 
             while (current != null)
             {

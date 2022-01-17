@@ -4,19 +4,19 @@
     {
         protected override bool FindValue(int value)
         {
-            if (Node is null)
+            if (RootNode is null)
                 return false;
 
-            return TryFindValue(Node, value);
+            return TryFindValue(RootNode, value);
         }
 
 
         protected override void InsertValue(int value)
         {
-            if (Node is null)
-                Node = new Node(value);
+            if (RootNode is null)
+                RootNode = new Node(value);
             else
-                TryInsertValue(Node, value);
+                TryInsertValue(RootNode, value);
         }
 
         private bool TryFindValue(Node node, int value)
