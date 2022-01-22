@@ -71,6 +71,27 @@ namespace Trees.BinaryTree
             return current.Value;
         }
 
+        public Node[] GetNodesAtLevel(int level)
+        {
+            return GetNodesAt(level, RootNode).ToArray();
+        }
+
+        private List<Node> GetNodesAt(int level, Node node)
+        {
+            if (level == 0)
+                return new List<Node>{ node };
+
+            var result = new List<Node>();
+
+            if(node.LeftNode != null)
+                result.AddRange(GetNodesAt(level -1, node.LeftNode));
+
+            if (node.RightNode != null)
+                result.AddRange(GetNodesAt(level - 1, node.RightNode));
+
+            return result;
+        }
+
         public bool Equals(Tree other)
         {
             return Equals(RootNode, other.RootNode);

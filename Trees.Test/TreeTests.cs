@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System.Collections.Generic;
+using System.Linq;
 using Trees.BinaryTree;
 using Xunit;
 
@@ -237,6 +238,35 @@ namespace Trees.Test
             var result = tree.Equals(otherTree);
 
             result.Should().BeFalse();
+        }
+
+        [Theory]
+        [InlineData(0, 20)]
+        [InlineData(1, 10, 30)]
+        [InlineData(2, 5, 11, 40)]
+        [InlineData(3, 4, 6, 50)]
+        [InlineData(4, 60)]
+        [InlineData(5)]
+        public void GetNodesByLevel_ReturnExpectedNodes(int level, params int[] expectedNodeValues)
+        {
+            var tree = new TestTree();
+
+            tree.Insert(20);
+            tree.Insert(10);
+            tree.Insert(30);
+            tree.Insert(5);
+            tree.Insert(11);
+            tree.Insert(4);
+            tree.Insert(6);
+            tree.Insert(40);
+            tree.Insert(50);
+            tree.Insert(60);
+
+            var nodes = tree.GetNodesAtLevel(level);
+
+            var nodesValues = nodes.Select(x => x.Value).ToArray();
+
+            nodesValues.Should().BeEquivalentTo(expectedNodeValues);
         }
 
         public static IEnumerable<Tree[]> GetTrees()
